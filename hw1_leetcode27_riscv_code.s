@@ -4,9 +4,7 @@ nums1:
 nums2:
     .word   1,2,3,4,5,6,7,8,4
 nums3:
-    .word   4,2,3,4,4,6,7,8,9
-new_nums:
-    .word   0,0,0,0,0,0,0,0,0
+    .word   4,2,3,4,4,6,7,8,9    
 len:
     .word   9
 value:
@@ -21,24 +19,20 @@ str3:
 .text
 # s2 : num len
 # s3 : remove value
-# s4 : new_nums
 # s5 : new_nums len
 # s6 : count
 
 main:
     la      a0, nums1           # load nums1 addr
     jal     ra, removeElement   # go to removeElement
-    la      a1, new_nums        # load new_nums
     jal     ra, printResult     # print nums1 result to console
 
     la      a0, nums2           # load nums2 addr
     jal     ra, removeElement   # go to removeElement
-    la      a1, new_nums        # load new_nums
     jal     ra, printResult     # print nums1 result to console
 
     la      a0, nums3           # load nums3 addr
     jal     ra, removeElement   # go to removeElement
-    la      a1, new_nums        # load new_nums
     jal     ra, printResult     # print nums1 result to console
 
     j   exit
@@ -46,21 +40,24 @@ main:
 removeElement:
     lw      s2, len             # load num len
     lw      s3, value           # load will remove value
-    la      s4, new_nums        # load new_nums
     mv      s5, x0              # set count new_nums len
     addi    s6, x0, 1           # set count = 1
+    mv      a1, a0              # copy address to a1
+    addi    sp,sp,-4
+    sw      a0, 0(sp)           # save nums head address in stack
 loop:
     lw      t0, 0(a0)           # load nums value
     beq     t0, s3, next        # if nums == value, go next
-    sw      t0, 0(s4)           # save nums value to new_nums
-    addi    s4, s4, 4           # new_nums next addr
-    addi    s5, s5, 1           # count new_nums len
+    sw      t0, 0(a1)           # write back value to nums
+    addi    a1, a1, 4           # nums next addr for write back addr
+    addi    s5, s5, 1           # count write value len
 next:
-    addi    a0, a0, 4           # new_nums next addr
+    addi    a0, a0, 4           # nums next addr
     beq     s6, s2, end         # count = len, go end
     addi    s6, s6, 1           # count +1
     j loop
 end:
+    lw      a1, 0(sp)           # restore nums head address for print used
     jr ra
 
 printResult:

@@ -31,9 +31,10 @@ int removeElement(int* nums, int numsSize, int val){
     int read_index = 0;
     int write_index = 0;
     while (read_index < numsSize) {
-        if (nums[read_index++] != val) {
-            nums[write_index++] = nums[read_index-1];
+        if (nums[read_index] != val) {
+            nums[write_index++] = nums[read_index];
         }
+        read_index++;
     }
     return write_index;
 }
