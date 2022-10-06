@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 /*
 computer architecture homework1
 Given an integer array nums and an integer val, remove all occurrences of val in nums.
@@ -32,6 +33,7 @@ int removeElement(int* nums, int numsSize, int val){
     int write_index = 0;
     while (read_index < numsSize) {
         if (nums[read_index] != val) {
+            assert(nums[read_index] != val);    //diagnostics program nums[read_index] != val
             nums[write_index++] = nums[read_index];
         }
         read_index++;
