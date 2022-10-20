@@ -2,9 +2,7 @@
 #a0-7 :argument registers
 #t0-6 :temp registers
 .data
-#ret_arr: .word 0,0,0,0,0,0,0,0,0,0
 str1:   .string " "
-returnSize_val:   .string "returnSize_val="
 newline:   .string "\n"
 .bss
 ret_arr: .word 0
