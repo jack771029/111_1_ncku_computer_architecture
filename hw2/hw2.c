@@ -24,7 +24,7 @@ int main(){
 	}
 	printf("\n");
 
-	rowIndex = 33;
+	rowIndex = 5;
 	ans = getRow(rowIndex, &ans_size);
     printf("%d\n",ans_size);
     for(i=0;i<ans_size;i++){

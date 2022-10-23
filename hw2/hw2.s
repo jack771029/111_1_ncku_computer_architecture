@@ -19,7 +19,6 @@
 main:
     addi    a3, x0, 0           # a3 = rowIndex
     la      s0, ret_arr         # ret_arr
-    la      s1, str1
     jal     ra, getRow
     addi    t1, x0, 0           # t 1 = i
     jal     print_loop
@@ -29,7 +28,6 @@ main:
     jal     print_loop
     addi    a3, x0, 33          # a3 = rowIndex
     la      s0, ret_arr
-    la      s1, str1
     jal     getRow
     addi    t1, x0, 0           # t1 = i
     jal     print_loop
